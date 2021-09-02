@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, Button, Dimensions} from 'react-native';
 import DataSelectionButton from '../components/DataSelectionButton';
-import TemperatureDataChart from '../components/TemperatureDataChart';
 import HumidityDataChart from '../components/HumidityDataChart';
 import LightDataChart from '../components/LightDataChart';
 
@@ -13,14 +12,11 @@ const DataScreen = props => {
   let dataView;
   let dataChart;
   if (dataOption == '0') {
-    dataView = <Text style={styles.graphicsTitle}>Temperatura</Text>;
-    dataChart = <TemperatureDataChart />;
-  } else if (dataOption == '1') {
-    dataView = <Text style={styles.graphicsTitle}>Humedad</Text>;
-    dataChart = <HumidityDataChart />;
+    dataView = <Text style={styles.graphicsTitle}>Humedad de Tierra</Text>;
+    dataChart = <HumidityDataChart plantId={plantID} />;
   } else {
     dataView = <Text style={styles.graphicsTitle}>Luminosidad</Text>;
-    dataChart = <LightDataChart />;
+    dataChart = <LightDataChart plantId={plantID} />;
   }
 
   return (
@@ -41,24 +37,17 @@ const DataScreen = props => {
           justifyContent: 'center',
         }}>
         <DataSelectionButton
-          style={{backgroundColor: 'orange'}}
-          title={'Temperatura'}
-          onPress={() => {
-            setDataOption(0);
-          }}
-        />
-        <DataSelectionButton
           style={{backgroundColor: '#4d88d1'}}
           title={'Humedad'}
           onPress={() => {
-            setDataOption(1);
+            setDataOption(0);
           }}
         />
         <DataSelectionButton
           style={{backgroundColor: '#62cd4d'}}
           title={'Luminosidad'}
           onPress={() => {
-            setDataOption(2);
+            setDataOption(1);
           }}
         />
       </View>

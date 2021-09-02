@@ -1,43 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, Button, Dimensions} from 'react-native';
-import DataSelectionButton from './DataSelectionButton';
+import {getPlantLum} from '../api';
 import {LineChart} from 'react-native-chart-kit';
 
 const LightDataChart = props => {
+  const [chartData, setChartData] = useState([0, 0, 0, 0, 0, 0, 0]);
+
+  const loadData = async () => {
+    try {
+      const measures = await getPlantLum(props.plantId);
+      let data = measures.map(item => parseInt(item.lum));
+      setChartData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
-    <View>
+    <View testID={props.testID}>
       <LineChart
         data={{
           labels: ['6am', '10am', '2pm', '6pm', '10pm', '2am'],
           datasets: [
             {
-              data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-              ],
+              data: chartData,
             },
           ],
         }}
-        width={360} // from react-native
+        width={370} // from react-native
         height={210}
-        yAxisSuffix="Lux"
+        yAxisSuffix="L"
         yAxisInterval={2} // optional, defaults to 1
         chartConfig={{
           backgroundColor: 'transparent',

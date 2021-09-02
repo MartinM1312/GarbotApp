@@ -1,8 +1,28 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import {PLANTS} from '../data/dummy-data';
+import {getEnvMeasures} from '../api';
 
 const HomeScreen = props => {
+  const [measuresData, setMeasureData] = useState([]);
+
+  const loadMeasures = async () => {
+    try {
+      const measures = await getEnvMeasures();
+      setMeasureData(measures);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    loadMeasures();
+  }, [measuresData]);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   const renderItem = itemData => {
     return (
       <TouchableOpacity
@@ -16,13 +36,44 @@ const HomeScreen = props => {
           });
         }}>
         <View style={styles.item}>
-          <Text style={styles.title}>{itemData.item.id}</Text>
-          <Text>{itemData.item.type}</Text>
+          <Text style={styles.title}>{itemData.item.type}</Text>
+          <Text>{itemData.item.id}</Text>
         </View>
       </TouchableOpacity>
     );
   };
-  return <FlatList data={PLANTS} renderItem={renderItem} />;
+  return (
+    <View>
+      <View style={{alignItems: 'center'}}>
+        <View style={styles.measures}>
+          <View style={styles.measureItem}>
+            <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+              Temperatura Ambiente
+            </Text>
+            <Text>
+              {measuresData.length != 0
+                ? measuresData[measuresData.length - 1].env_temp
+                : 0}
+              °C
+            </Text>
+          </View>
+          <View style={styles.measureItem}>
+            <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+              Humedad Ambiente
+            </Text>
+            <Text>
+              {' '}
+              {measuresData.length != 0
+                ? measuresData[measuresData.length - 1].env_hum
+                : 0}
+              %
+            </Text>
+          </View>
+        </View>
+      </View>
+      <FlatList data={PLANTS} renderItem={renderItem} />
+    </View>
+  );
 };
 
 HomeScreen.navigationOptions = {
@@ -50,6 +101,20 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 20,
+  },
+  measures: {
+    flexDirection: 'row',
+    width: '95%',
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    paddingBottom: 5,
+    backgroundColor: '#6dcff6',
+    borderRadius: 8,
+  },
+  measureItem: {
+    marginHorizontal: 10,
   },
 });
 

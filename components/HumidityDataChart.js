@@ -1,9 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, Button, Dimensions} from 'react-native';
-import DataSelectionButton from './DataSelectionButton';
 import {LineChart} from 'react-native-chart-kit';
+import {getPlantHum, getPlants} from '../api';
 
 const HumidityDataChart = props => {
+  const [chartData, setChartData] = useState([0, 0, 0, 0, 0, 0, 0]);
+
+  const loadData = async () => {
+    try {
+      const measures = await getPlantHum(props.plantId);
+      let data = measures.map(item => parseInt(item.hum));
+      setChartData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <View>
       <LineChart
@@ -11,27 +26,7 @@ const HumidityDataChart = props => {
           labels: ['6am', '10am', '2pm', '6pm', '10pm', '2am'],
           datasets: [
             {
-              data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-              ],
+              data: chartData,
             },
           ],
         }}
