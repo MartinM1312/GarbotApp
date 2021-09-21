@@ -23,7 +23,7 @@ const HumidityDataChart = props => {
     <View>
       <LineChart
         data={{
-          labels: ['6am', '10am', '2pm', '6pm', '10pm', '2am'],
+          labels: ['6am', '10am', '2pm', '4pm'],
           datasets: [
             {
               data: chartData,

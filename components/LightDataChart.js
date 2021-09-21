@@ -22,14 +22,14 @@ const LightDataChart = props => {
     <View testID={props.testID}>
       <LineChart
         data={{
-          labels: ['6am', '10am', '2pm', '6pm', '10pm', '2am'],
+          labels: ['6am', '10am', '2pm', '4pm'],
           datasets: [
             {
               data: chartData,
             },
           ],
         }}
-        width={370} // from react-native
+        width={350} // from react-native
         height={210}
         yAxisSuffix="L"
         yAxisInterval={2} // optional, defaults to 1
@@ -37,7 +37,7 @@ const LightDataChart = props => {
           backgroundColor: 'transparent',
           backgroundGradientFrom: 'white',
           backgroundGradientTo: 'white',
-          decimalPlaces: 2, // optional, defaults to 2dp
+          decimalPlaces: 0, // optional, defaults to 2dp
           // color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           color: () => `#62cd4d`,
           labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,

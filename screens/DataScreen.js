@@ -32,7 +32,7 @@ const DataScreen = props => {
         style={{
           flex: 1,
           flexDirection: 'row',
-          width: '90%',
+          width: '85%',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   graphicsContainer: {
-    width: '90%',
+    width: '100%',
     height: '40%',
     // borderColor: 'black',
     // borderWidth: 2,
