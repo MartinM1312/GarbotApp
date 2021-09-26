@@ -51,9 +51,8 @@ const HomeScreen = props => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{flex: 1, zIndex: 2}}>
+      <View style={{flex: 1}}>
         <EnvCard
-          style={styles.tempCard}
           envMeasure={
             measuresData.length != 0
               ? measuresData[measuresData.length - 1].env_temp

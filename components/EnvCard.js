@@ -1,12 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 
+const tempSymb = ' °C';
+const humSymb = ' %';
 const EnvCard = props => {
   return (
     <View style={{...styles.container, ...props.style}}>
       <View style={styles.topContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{props.envMeasure}</Text>
+          <Text style={styles.title}>
+            {props.envMeasure}
+            {props.title == 'Temperatura' ? tempSymb : humSymb}
+          </Text>
         </View>
         <View style={styles.imgContainer}>
           <Image
@@ -64,17 +69,19 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 8,
-    width: '45%',
+    width: '50%',
     height: '45%',
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
     //ios
-    shadowColor: 'black',
+    //shadowColor: 'black',
     shadowOffset: {width: 0, height: 2},
-    shadowRadius: 5,
+    shadowRadius: 1,
     //android
-    elevation: 2,
+    elevation: 4,
+    //backgroundColor: 'red',
   },
 });
 
