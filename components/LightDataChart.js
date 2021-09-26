@@ -14,10 +14,14 @@ const LightDataChart = props => {
     } catch (error) {
       console.log(error);
     }
+    console.log('fetch finished');
   };
+
   useEffect(() => {
     loadData();
+    return () => {};
   }, []);
+
   return (
     <View testID={props.testID}>
       <LineChart

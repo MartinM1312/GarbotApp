@@ -41,6 +41,9 @@ const SettingsScreen = props => {
     </View>
   );
 };
+SettingsScreen.navigationOptions = {
+  headerTitle: 'Settings',
+};
 
 const styles = StyleSheet.create({
   container: {

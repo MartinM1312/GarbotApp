@@ -1,8 +1,15 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import {PLANTS} from '../data/dummy-data';
 import {getEnvMeasures} from '../api';
-
+import EnvCard from '../components/EnvCard';
 const HomeScreen = props => {
   const [measuresData, setMeasureData] = useState([]);
 
@@ -17,15 +24,13 @@ const HomeScreen = props => {
 
   useEffect(() => {
     loadMeasures();
-  }, [measuresData]);
-
-  useEffect(() => {
     return () => {};
   }, []);
 
   const renderItem = itemData => {
     return (
       <TouchableOpacity
+        style={{alignItems: 'center'}}
         onPress={() => {
           props.navigation.navigate({
             routeName: 'Data',
@@ -37,15 +42,28 @@ const HomeScreen = props => {
         }}>
         <View style={styles.item}>
           <Text style={styles.title}>{itemData.item.type}</Text>
-          <Text>{itemData.item.id}</Text>
+          <Text style={{fontFamily: 'OpenSans-Bold', paddingBottom: 5}}>
+            {itemData.item.id}
+          </Text>
         </View>
       </TouchableOpacity>
     );
   };
   return (
-    <View>
-      <View style={{alignItems: 'center'}}>
-        <View style={styles.measures}>
+    <SafeAreaView style={styles.container}>
+      <View style={{flex: 1, zIndex: 2}}>
+        <EnvCard
+          style={styles.tempCard}
+          envMeasure={
+            measuresData.length != 0
+              ? measuresData[measuresData.length - 1].env_temp
+              : 0
+          }
+          title="Temperatura"
+          subTitle="AMBIENTE"
+        />
+
+        {/* <View style={styles.measures}>
           <View style={styles.measureItem}>
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>
               Temperatura Ambiente
@@ -69,10 +87,17 @@ const HomeScreen = props => {
               %
             </Text>
           </View>
-        </View>
+        </View> */}
       </View>
-      <FlatList data={PLANTS} renderItem={renderItem} />
-    </View>
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          flex: 1,
+        }}>
+        <FlatList style={{zIndex: 0}} data={PLANTS} renderItem={renderItem} />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -81,14 +106,16 @@ HomeScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   item: {
     flex: 1,
-    margin: 15,
-    height: 150,
+    marginVertical: 15,
+    width: '90%',
+    height: 130,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    borderRadius: 12,
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 2},
     shadowRadius: 6,
@@ -96,11 +123,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 6,
     borderRadius: 5,
-    padding: 25,
   },
   title: {
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     fontSize: 20,
+    fontFamily: 'OpenSans-Bold',
+    padding: 8,
   },
   measures: {
     flexDirection: 'row',
@@ -112,6 +140,12 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     backgroundColor: '#6dcff6',
     borderRadius: 8,
+    zIndex: 2,
+    shadowColor: 'black',
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 6,
+    shadowOpacity: 0.3,
+    elevation: 6,
   },
   measureItem: {
     marginHorizontal: 10,

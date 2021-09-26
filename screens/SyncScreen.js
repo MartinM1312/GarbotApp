@@ -50,7 +50,9 @@ const SyncScreen = props => {
     </TouchableWithoutFeedback>
   );
 };
-
+SyncScreen.navigationOptions = {
+  headerTitle: 'Sincronizar',
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,

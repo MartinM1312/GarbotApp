@@ -15,13 +15,21 @@ const MainNavigator = createStackNavigator(
     Data: DataScreen,
   },
   {
-    headerMode: 'float',
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#3d88c1',
+        backgroundColor: 'transparent',
+        elevation: 0,
       },
-      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontFamily: 'OpenSans-Bold',
+        fontSize: 18,
+      },
+      headerTintColor: '#3d88c1',
       headerTitleAlign: 'center',
+      headerShown: true,
+      // headerTransparent: {
+      //   position: 'absolute',
+      // },
     },
   },
 );
@@ -33,10 +41,13 @@ const settingsNavigator = createStackNavigator(
     Sync: SyncScreen,
   },
   {
-    headerMode: 'float',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#3d88c1',
+      },
+      headerTitleStyle: {
+        fontFamily: 'OpenSans-Bold',
+        fontSize: 18,
       },
       headerTintColor: 'white',
       headerTitleAlign: 'center',

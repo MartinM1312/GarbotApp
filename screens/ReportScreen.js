@@ -93,6 +93,10 @@ const ReportScreen = props => {
   );
 };
 
+ReportScreen.navigationOptions = {
+  headerTitle: 'Reportar',
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
