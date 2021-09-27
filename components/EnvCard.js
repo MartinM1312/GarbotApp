@@ -40,14 +40,13 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     width: '100%',
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     paddingBottom: 5,
   },
   topContainer: {
     flexDirection: 'row',
     height: '50%',
     marginHorizontal: 11,
-    marginTop: 5,
   },
   imgContainer: {
     flex: 1,
@@ -69,8 +68,8 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 8,
-    width: '50%',
-    height: '45%',
+    width: 200,
+    height: 130,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',

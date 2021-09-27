@@ -41,14 +41,16 @@ const SettingsScreen = props => {
     </View>
   );
 };
-SettingsScreen.navigationOptions = {
-  headerTitle: 'Settings',
+export const SettingsScreenOptions = navData => {
+  return {headerTitle: 'Settings'};
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    paddingTop: 45,
+    paddingBottom: 220,
   },
   titleContainer: {
     fontSize: 30,

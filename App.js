@@ -1,14 +1,16 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {createStore, combineReducers} from 'redux';
-import MainNavigator from './navigation/ScreensNavigator';
+import {MainNavigator, TabNavigator} from './navigation/ScreensNavigator';
 import {enableScreens} from 'react-native-screens';
-import {Provider} from 'react-redux';
+import {NavigationContainer} from '@react-navigation/native';
 
-enableScreens();
+// enableScreens();
 
 const App = props => {
-  return <MainNavigator />;
+  return (
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
+  );
 };
 
 export default App;

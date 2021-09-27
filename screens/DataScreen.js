@@ -5,8 +5,8 @@ import HumidityDataChart from '../components/HumidityDataChart';
 import LightDataChart from '../components/LightDataChart';
 
 const DataScreen = props => {
-  const plantID = props.navigation.getParam('plantID');
-  const plantType = props.navigation.getParam('plantType');
+  const {plantID} = props.route.params;
+  const {plantType} = props.route.params;
 
   const [dataOption, setDataOption] = useState('0');
   let dataView;
@@ -55,8 +55,8 @@ const DataScreen = props => {
   );
 };
 
-DataScreen.navigationOptions = navigationData => {
-  const plantID = navigationData.navigation.getParam('plantID');
+export const DataScreenOptions = props => {
+  const {plantID} = props.route.params;
   return {
     headerTitle: plantID,
   };
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // justifyContent: 'center',
     backgroundColor: 'white',
+    paddingTop: 45,
   },
   titleContainer: {
     fontSize: 28,
