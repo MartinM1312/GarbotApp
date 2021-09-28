@@ -14,7 +14,6 @@ const HumidityDataChart = props => {
     } catch (error) {
       console.log(error);
     }
-    console.log('fetch finished');
   };
   useEffect(() => {
     loadData();

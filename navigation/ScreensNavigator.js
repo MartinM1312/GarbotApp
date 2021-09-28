@@ -9,7 +9,6 @@ import DataScreen, {DataScreenOptions} from '../screens/DataScreen';
 import SettingsScreen, {SettingsScreenOptions} from '../screens/SettingsScreen';
 import SyncScreen from '../screens/SyncScreen';
 import ReportScreen from '../screens/ReportScreen';
-import {create} from 'react-test-renderer';
 
 const defaultNavigationOptions = {
   headerStyle: {
@@ -32,15 +31,20 @@ const tabBarOptions = {
   style: {
     position: 'absolute',
     zIndex: 0,
-    bottom: 5,
+    bottom: 10,
     left: 10,
     right: 10,
     width: '95%',
-    elevation: 20,
     backgroundColor: 'white',
     borderRadius: 15,
+    borderColor: 'grey',
     height: 70,
-    // alignSelf: 'center',
+    shadowColor: 'black',
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 6,
+    shadowOpacity: 0.3,
+    elevation: 7,
+    borderTopWidth: 0,
   },
 };
 

@@ -41,8 +41,8 @@ const RefreshButton = props => {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    width: 150,
-    height: 130,
+    width: 100,
+    height: 132,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 15,
