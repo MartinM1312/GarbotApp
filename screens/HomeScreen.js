@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
   },
   line: {
     width: '80%',
-    height: 0.5,
+    // height: 0.5,
+    marginTop: 4,
     borderColor: 'grey',
     borderWidth: 0.5,
     marginLeft: 10,

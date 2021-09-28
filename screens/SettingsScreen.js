@@ -24,18 +24,14 @@ const SettingsScreen = props => {
         title={'Sincronizar'}
         subtitle={'Conecta tu dispositivo movil con GarBot'}
         onPress={() => {
-          props.navigation.navigate({
-            routeName: 'Sync',
-          });
+          props.navigation.navigate('Sync');
         }}
       />
       <SettingsOption
         title={'Reportar Error'}
         subtitle={'Cuéntanos si tuviste algún problema'}
         onPress={() => {
-          props.navigation.navigate({
-            routeName: 'Report',
-          });
+          props.navigation.navigate('Report');
         }}
       />
     </View>

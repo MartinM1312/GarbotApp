@@ -34,8 +34,10 @@ const LightDataChart = props => {
         }}
         width={350} // from react-native
         height={210}
+        withInnerLines={false}
+        withOuterLines={false}
         yAxisSuffix="L"
-        yAxisInterval={2} // optional, defaults to 1
+        // yAxisInterval={2} // optional, defaults to 1
         chartConfig={{
           backgroundColor: 'transparent',
           backgroundGradientFrom: 'white',

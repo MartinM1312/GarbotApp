@@ -7,30 +7,35 @@ import LightDataChart from '../components/LightDataChart';
 const DataScreen = props => {
   const {plantID} = props.route.params;
   const {plantType} = props.route.params;
+  const [dataLogo, setDataLogo] = useState(
+    require('../assets/img/humMeter1.png'),
+  );
+  const [dataTitle, setDataTitle] = useState('Humedad de Tierra');
+  const [dataChart, setDataChart] = useState(
+    <HumidityDataChart plantId={plantID} />,
+  );
 
-  const [dataOption, setDataOption] = useState('0');
-  let dataView;
-  let dataChart;
-  if (dataOption == '0') {
-    dataView = <Text style={styles.graphicsTitle}>Humedad de Tierra</Text>;
-    dataChart = <HumidityDataChart plantId={plantID} />;
-  } else {
-    dataView = <Text style={styles.graphicsTitle}>Luminosidad</Text>;
-    dataChart = <LightDataChart plantId={plantID} />;
-  }
+  const humButtonHandler = () => {
+    setDataTitle('Humedad de Tierra');
+    setDataLogo(require('../assets/img/humMeter1.png'));
+    setDataChart(<HumidityDataChart plantId={plantID} />);
+  };
+  const lightButtonHandler = () => {
+    setDataTitle('Luminosidad');
+    setDataLogo(require('../assets/img/sun.png'));
+
+    setDataChart(<LightDataChart plantId={plantID} />);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.typeTitle}>{plantType}</Text>
-      <Image
-        style={styles.logo}
-        source={require('../assets/img/garbotLogo.png')}
-      />
-      {dataView}
+      <Image style={styles.logo} source={dataLogo} />
+      <Text style={styles.graphicsTitle}>{dataTitle}</Text>
       <View style={styles.graphicsContainer}>{dataChart}</View>
       <View
         style={{
-          flex: 1,
+          // flex: 1,
           flexDirection: 'row',
           width: '85%',
           alignItems: 'center',
@@ -39,16 +44,12 @@ const DataScreen = props => {
         <DataSelectionButton
           style={{backgroundColor: '#4d88d1'}}
           title={'Humedad'}
-          onPress={() => {
-            setDataOption(0);
-          }}
+          onPress={humButtonHandler}
         />
         <DataSelectionButton
           style={{backgroundColor: '#62cd4d'}}
           title={'Luminosidad'}
-          onPress={() => {
-            setDataOption(1);
-          }}
+          onPress={lightButtonHandler}
         />
       </View>
     </View>
@@ -86,6 +87,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginVertical: 10,
+    width: 45,
+    height: 45,
   },
   graphicsContainer: {
     width: '100%',
@@ -99,6 +102,7 @@ const styles = StyleSheet.create({
   graphicsTitle: {
     fontSize: 18,
     marginBottom: 5,
+    fontFamily: 'OpenSans-Regular',
   },
 });
 

@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-
 const tempSymb = ' °C';
 const humSymb = ' %';
 
@@ -8,7 +7,31 @@ const EnvCard = props => {
   const [slideActive, setSlideActive] = useState(0);
 
   const onSlide = nativeEvent => {
-    setSlideActive(!slideActive);
+    if (nativeEvent) {
+      const slide = Math.ceil(
+        nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width,
+      );
+      if (slide != slideActive) {
+        setSlideActive(slide);
+      }
+    }
+  };
+
+  const Dots = () => {
+    return (
+      <View style={styles.dotsContainer}>
+        <View
+          style={{
+            ...styles.dot,
+            ...{backgroundColor: slideActive ? 'grey' : '#3d88c1'},
+          }}></View>
+        <View
+          style={{
+            ...styles.dot,
+            ...{backgroundColor: slideActive ? '#3d88c1' : 'grey'},
+          }}></View>
+      </View>
+    );
   };
 
   return (
@@ -16,9 +39,9 @@ const EnvCard = props => {
       <View>
         <ScrollView
           horizontal
+          pagingEnabled
           showsHorizontalScrollIndicator={false}
-          onScrollEndDrag={({nativeEvent}) => onSlide(nativeEvent)}
-          pagingEnabled>
+          onMomentumScrollEnd={({nativeEvent}) => onSlide(nativeEvent)}>
           <View style={styles.dataContainer}>
             <View style={styles.topContainer}>
               <View style={styles.titleContainer}>
@@ -61,14 +84,7 @@ const EnvCard = props => {
           </View>
         </ScrollView>
       </View>
-      <View style={styles.dotsContainer}>
-        <View
-          style={{
-            ...styles.dot,
-            ...{backgroundColor: slideActive ? 'black' : 'grey'},
-          }}></View>
-        <View style={styles.dot}></View>
-      </View>
+      <Dots />
     </View>
   );
 };
@@ -90,11 +106,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-
-    marginHorizontal: 5,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 4,
   },
   mainText: {
     fontSize: 15,
@@ -142,12 +157,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     //ios
-    //shadowColor: 'black',
     shadowOffset: {width: 0, height: 2},
     shadowRadius: 1,
     //android
     elevation: 4,
-    //backgroundColor: 'red',
   },
 });
 

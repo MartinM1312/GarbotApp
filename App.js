@@ -1,9 +1,9 @@
 import React from 'react';
-import {MainNavigator, TabNavigator} from './navigation/ScreensNavigator';
-import {enableScreens} from 'react-native-screens';
+import {TabNavigator} from './navigation/ScreensNavigator';
 import {NavigationContainer} from '@react-navigation/native';
+import {LogBox} from 'react-native';
 
-// enableScreens();
+LogBox.ignoreLogs(['Reanimated 2']);
 
 const App = props => {
   return (

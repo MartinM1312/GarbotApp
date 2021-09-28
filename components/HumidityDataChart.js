@@ -32,10 +32,12 @@ const HumidityDataChart = props => {
             },
           ],
         }}
+        withInnerLines={false}
+        withOuterLines={false}
         width={360} // from react-native
         height={210}
         yAxisSuffix="%"
-        yAxisInterval={2} // optional, defaults to 1
+        // yAxisInterval={100000} // optional, defaults to 1
         chartConfig={{
           backgroundColor: 'transparent',
           backgroundGradientFrom: 'white',
@@ -46,6 +48,7 @@ const HumidityDataChart = props => {
           labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
             borderRadius: 15,
+            elevation: 7,
           },
           propsForDots: {
             r: '0',

@@ -3,39 +3,20 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 const DataSelectionButton = props => {
   return (
-    <View style={styles.button}>
-      <TouchableOpacity
-        style={{
-          flex: 1,
-          width: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'aliceblue',
-          borderRadius: 15,
-        }}
-        onPress={props.onPress}>
-        <View style={{...styles.buble, ...props.style}}></View>
-        <Text>{props.title}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      style={{...styles.container, ...props.style}}
+      onPress={props.onPress}>
+      <Text style={styles.title}>{props.title}</Text>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {alignItems: 'center', justifyContent: 'center'},
-  text: {
-    flex: 1,
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  button: {
+  container: {
     flex: 1,
     marginHorizontal: 8,
     height: 60,
-    borderWidth: 1.5,
-    borderColor: 'black',
-    borderRadius: 5,
+    // width: 120,
     alignItems: 'center',
     justifyContent: 'center',
     //ios
@@ -45,15 +26,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     backgroundColor: 'white',
     //android
-    elevation: 6,
-    borderRadius: 5,
+    elevation: 7,
+    borderRadius: 20,
   },
-  buble: {
-    width: 15,
-    height: 15,
-    borderRadius: 7.5,
-    backgroundColor: 'blue',
-    margin: 3,
+  title: {
+    fontFamily: 'OpenSans-Bold',
+    fontSize: 16,
+    color: 'aliceblue',
   },
 });
 
