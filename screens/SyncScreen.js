@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert,
   Linking,
 } from 'react-native';
 import Button from '../components/Button';

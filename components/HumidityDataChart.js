@@ -1,25 +1,57 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image, Button, Dimensions} from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
+import {View, Button} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
-import {getPlantHum, getPlants} from '../api';
+import {getPlantHum} from '../api';
+import {useSelector, useDispatch} from 'react-redux';
 
 const HumidityDataChart = props => {
-  const [chartData, setChartData] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const dispatch = useDispatch();
+
+  const stateID = useSelector(state => state.humData.id);
+
+  (() => {
+    if (stateID != props.plantId) {
+      dispatch({
+        type: 'SET_HUM_DATA',
+        data: [0, 0, 0, 0, 0, 0, 0],
+      });
+    }
+  })();
+
+  const [stateData, setStateData] = useState(
+    useSelector(state => state.humData.data),
+  );
 
   const loadData = async () => {
     try {
       const measures = await getPlantHum(props.plantId);
       let data = measures.map(item => parseInt(item.hum));
-      setChartData(data);
+      setStateData(data);
     } catch (error) {
       console.log(error);
     }
   };
+  const setNewData = () => {
+    dispatch({
+      type: 'SET_HUM_DATA',
+      data: stateData,
+    });
+  };
+  const setNewId = () => {
+    dispatch({
+      type: 'SET_HUM_ID',
+      id: props.plantId,
+    });
+  };
+
   useEffect(() => {
     loadData();
 
     return () => {};
   }, []);
+
+  setNewData();
+  setNewId();
 
   return (
     <View>
@@ -28,7 +60,7 @@ const HumidityDataChart = props => {
           labels: ['6am', '10am', '2pm', '4pm'],
           datasets: [
             {
-              data: chartData,
+              data: stateData,
             },
           ],
         }}

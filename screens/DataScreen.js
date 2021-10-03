@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Image, Button, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import DataSelectionButton from '../components/DataSelectionButton';
 import HumidityDataChart from '../components/HumidityDataChart';
 import LightDataChart from '../components/LightDataChart';
@@ -29,7 +29,7 @@ const DataScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.typeTitle}>{plantType}</Text>
+      <Text style={styles.typeTitle}>ID: {plantID}</Text>
       <Image style={styles.logo} source={dataLogo} />
       <Text style={styles.graphicsTitle}>{dataTitle}</Text>
       <View style={styles.graphicsContainer}>{dataChart}</View>
@@ -57,9 +57,9 @@ const DataScreen = props => {
 };
 
 export const DataScreenOptions = props => {
-  const {plantID} = props.route.params;
+  const {plantType} = props.route.params;
   return {
-    headerTitle: plantID,
+    headerTitle: plantType,
   };
 };
 const styles = StyleSheet.create({

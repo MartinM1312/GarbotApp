@@ -1,12 +1,5 @@
 import React, {useRef} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Image,
-  Animated,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, Animated} from 'react-native';
 import {Easing} from 'react-native-reanimated';
 
 const RefreshButton = props => {

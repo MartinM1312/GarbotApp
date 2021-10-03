@@ -1,25 +1,56 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image, Button, Dimensions} from 'react-native';
+import {View} from 'react-native';
 import {getPlantLum} from '../api';
 import {LineChart} from 'react-native-chart-kit';
+import {useDispatch, useSelector} from 'react-redux';
 
 const LightDataChart = props => {
-  const [chartData, setChartData] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const dispatch = useDispatch();
+
+  const stateID = useSelector(state => state.lightData.id);
+
+  (() => {
+    if (stateID != props.plantId) {
+      dispatch({
+        type: 'SET_LIGHT_DATA',
+        data: [0, 0, 0, 0, 0, 0, 0],
+      });
+    }
+  })();
+
+  const [stateData, setStateData] = useState(
+    useSelector(state => state.lightData.data),
+  );
 
   const loadData = async () => {
     try {
       const measures = await getPlantLum(props.plantId);
       let data = measures.map(item => parseInt(item.lum));
-      setChartData(data);
+      setStateData(data);
     } catch (error) {
       console.log(error);
     }
+  };
+  const setNewData = () => {
+    dispatch({
+      type: 'SET_LIGHT_DATA',
+      data: stateData,
+    });
+  };
+  const setNewId = () => {
+    dispatch({
+      type: 'SET_LIGHT_ID',
+      id: props.plantId,
+    });
   };
 
   useEffect(() => {
     loadData();
     return () => {};
   }, []);
+
+  setNewData();
+  setNewId();
 
   return (
     <View testID={props.testID}>
@@ -28,7 +59,7 @@ const LightDataChart = props => {
           labels: ['6am', '10am', '2pm', '4pm'],
           datasets: [
             {
-              data: chartData,
+              data: stateData,
             },
           ],
         }}

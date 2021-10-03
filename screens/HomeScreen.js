@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  SafeAreaView,
+  Platform,
+} from 'react-native';
 import {PLANTS} from '../data/dummy-data';
 import {getEnvMeasures} from '../api';
 import EnvCard from '../components/EnvCard';
@@ -62,7 +69,19 @@ const HomeScreen = props => {
       </View>
       <View style={styles.listContainer}>
         <FlatList
-          style={{width: '100%'}}
+          style={{
+            width: '100%',
+            overflow:
+              Platform.OS === 'android' && Platform.Version >= 21
+                ? 'hidden'
+                : 'visible',
+          }}
+          columnWrapperStyle={{
+            overflow:
+              Platform.OS === 'android' && Platform.Version >= 21
+                ? 'hidden'
+                : 'visible',
+          }}
           data={PLANTS}
           renderItem={renderItem}
           numColumns={2}
@@ -113,47 +132,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 5,
   },
-  item: {
-    flex: 1,
-    marginVertical: 15,
-    marginHorizontal: 15,
-    width: 150,
-    height: 120,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 6,
-    shadowOpacity: 0.3,
-    elevation: 7,
-    backgroundColor: 'white',
-    borderRadius: 20,
-  },
+
   title: {
     //fontWeight: 'bold',
     fontSize: 16,
     fontFamily: 'OpenSans-Bold',
     padding: 8,
-  },
-  measures: {
-    flexDirection: 'row',
-    width: '95%',
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    paddingBottom: 5,
-    backgroundColor: '#6dcff6',
-    borderRadius: 8,
-    zIndex: 2,
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 6,
-    shadowOpacity: 0.3,
-    elevation: 6,
-  },
-  measureItem: {
-    marginHorizontal: 10,
   },
 });
 

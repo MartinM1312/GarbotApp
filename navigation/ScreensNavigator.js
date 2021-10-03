@@ -1,6 +1,4 @@
 import React from 'react';
-import {View} from 'react-native';
-import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -106,77 +104,3 @@ export const TabNavigator = () => {
     </BottomTabNavigator.Navigator>
   );
 };
-// const MainNavigator = createStackNavigator(
-//   {
-//     Home: HomeScreen,
-//     Data: DataScreen,
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerStyle: {
-//         backgroundColor: 'transparent',
-//         elevation: 0,
-//       },
-//       headerTitleStyle: {
-//         fontFamily: 'OpenSans-Bold',
-//         fontSize: 18,
-//       },
-//       headerTintColor: '#3d88c1',
-//       headerTitleAlign: 'center',
-//       headerShown: true,
-//       // headerTransparent: {
-//       //   position: 'absolute',
-//       // },
-//     },
-//   },
-// );
-
-// const settingsNavigator = createStackNavigator(
-//   {
-//     Settings: SettingsScreen,
-//     Report: ReportScreen,
-//     Sync: SyncScreen,
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerStyle: {
-//         backgroundColor: '#3d88c1',
-//       },
-//       headerTitleStyle: {
-//         fontFamily: 'OpenSans-Bold',
-//         fontSize: 18,
-//       },
-//       headerTintColor: 'white',
-//       headerTitleAlign: 'center',
-//     },
-//   },
-// );
-
-// const TabNavigator = createBottomTabNavigator(
-//   {
-//     MainScreen: {
-//       screen: MainNavigator,
-//       navigationOptions: {
-//         tabBarIcon: tabInfo => {
-//           return <Ionicons name="leaf" size={25} color={tabInfo.tintColor} />;
-//         },
-//       },
-//     },
-//     Settings: {
-//       screen: settingsNavigator,
-//       navigationOptions: {
-//         tabBarIcon: tabInfo => {
-//           return <Ionicons name="cog" size={28} color={tabInfo.tintColor} />;
-//         },
-//       },
-//     },
-//   },
-//   {
-//     tabBarOptions: {
-//       activeTintColor: '#3d88c1',
-//       showLabel: false,
-//     },
-//   },
-// );
-
-//export default createAppContainer(TabNavigator);
