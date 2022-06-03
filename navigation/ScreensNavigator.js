@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen, {homeScreenOptions} from '../screens/HomeScreen';
 import DataScreen, {DataScreenOptions} from '../screens/DataScreen';
+import LoginScreen, {LoginScreenOptions} from '../screens/LoginScreen';
 import SettingsScreen, {SettingsScreenOptions} from '../screens/SettingsScreen';
 import SyncScreen from '../screens/SyncScreen';
 import ReportScreen from '../screens/ReportScreen';
@@ -53,9 +54,9 @@ export const MainNavigator = () => {
   return (
     <MainStackNavigator.Navigator screenOptions={defaultNavigationOptions}>
       <MainStackNavigator.Screen
-        name="Home"
-        component={HomeScreen}
-        options={homeScreenOptions}
+        name="Login"
+        component={LoginScreen}
+        options={LoginScreenOptions}
       />
       <MainStackNavigator.Screen
         name="Data"

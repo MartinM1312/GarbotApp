@@ -1,5 +1,5 @@
 import React from 'react';
-import {TabNavigator} from './navigation/ScreensNavigator';
+import {MainNavigator, TabNavigator} from './navigation/ScreensNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {LogBox} from 'react-native';
 import {createStore, combineReducers} from 'redux';
@@ -21,7 +21,8 @@ const App = props => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <TabNavigator />
+        {/* <TabNavigator /> */}
+        <MainNavigator />
       </NavigationContainer>
     </Provider>
   );
